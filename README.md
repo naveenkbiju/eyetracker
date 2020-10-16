@@ -35,5 +35,6 @@ The Eye Of The Typer Dataset (EOTT) - https://webgazer.cs.brown.edu/data/
 
 Libraries:
 https://github.com/pa7/heatmap.js.git
+
 https://github.com/brownhci/WebGazer.git
 
