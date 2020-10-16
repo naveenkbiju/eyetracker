@@ -13,12 +13,6 @@ How the size and placement of various page items are affectingtheir attention.
 What parts of the user interface do they miss
 
 
-This project is done by the four of us of S5 CSE-B:
-1. Marvel Varghese - 17
-2. Kevin Paul K - 9
-3. Naveen K Biju - 36
-4. Lakshmi Harish Kumar - 14
-
 
 We are doing the project using two methods, using Python OpenCV and using WebGazer. 
 
@@ -37,4 +31,13 @@ Libraries:
 https://github.com/pa7/heatmap.js.git
 
 https://github.com/brownhci/WebGazer.git
+
+
+
+
+This project is done by the four of us of S5 CSE-B:
+1. Marvel Varghese - 17
+2. Kevin Paul K - 9
+3. Naveen K Biju - 36
+4. Lakshmi Harish Kumar - 14
 
