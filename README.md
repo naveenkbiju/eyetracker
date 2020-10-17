@@ -17,7 +17,7 @@ What parts of the user interface do they miss
 We are doing the project using two methods, using Python OpenCV and using WebGazer. 
 
 In the first method, we are going to make a library specifically for gaze-tracking using Python.
--The first step is to detect the face of the user, and extract the eye-region from it and subsequently track the pupil movement from that region. The face and eye-region is detected by Haar Cascade classifier files and the pupil is tracked using blob detection algorithm. We create a calibration model to calculate accurate gaze points. This data from the calibration model is then put into a linear equation model to predict the gaze point.
+-The first step is to detect the face of the user, and extract the eye-region from it and subsequently track the pupil movement from that region. The face and eye-region is detected by Haar Cascade classifier files and the pupil is tracked using blob detection algorithm. We create a calibration model to calculate accurate gaze points. This data from the calibration model is then put into a linear regression model to predict the gaze point.
 
 Dataset used:
 Haar Cascade Classifiers
