@@ -32,7 +32,9 @@ https://github.com/pa7/heatmap.js.git
 
 https://github.com/brownhci/WebGazer.git
 
-
+We have divided our project and is done in different branches. Each person work in different branches.
+Kevin Paul K works in jscalib
+Lakshmi Harish Kumar works in python-calibration
 
 
 This project is done by the four of us of S5 CSE-B:
