@@ -37,9 +37,11 @@ Kevin Paul K works in jscalib
 Lakshmi Harish Kumar works in python-calibration
 
 
-This project is done by the four of us of S5 CSE-B:
-1. Marvel Varghese - 17
-2. Kevin Paul K - 9
-3. Naveen K Biju - 36
-4. Lakshmi Harish Kumar - 14
+This project is done by 
+
+      Name                       Working Branch
+1. Marvel Varghese - 17         js-heatmaps
+2. Kevin Paul K - 9             jscalib
+3. Naveen K Biju - 36           python-pupiltracking
+4. Lakshmi Harish Kumar - 14    python-calibration
 
