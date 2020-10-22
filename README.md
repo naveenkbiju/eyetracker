@@ -38,10 +38,11 @@ Lakshmi Harish Kumar works in python-calibration
 
 
 This project is done by 
-
-      Name                       Working Branch
-1. Marvel Varghese - 17         js-heatmaps
-2. Kevin Paul K - 9             jscalib
-3. Naveen K Biju - 36           python-pupiltracking
-4. Lakshmi Harish Kumar - 14    python-calibration
+                   
+| Name | Working Branch |
+| ------ | ------ |
+| Marvel Varghese 17 | js-heatmaps |
+| Kevin Paul K - 9| jscalib |
+| Naveen K Biju - 36    | python-pupiltracking|
+|Lakshmi Harish Kumar - 14 |python-calibration|
 
