@@ -32,10 +32,9 @@ https://github.com/pa7/heatmap.js.git
 
 https://github.com/brownhci/WebGazer.git
 
-We have divided our project and is done in different branches. Each person work in different branches.
-Kevin Paul K works in jscalib
-Lakshmi Harish Kumar works in python-calibration
+We have divided our project and created seperate branches for each person and also additional branches to make them merge at the end of project.
 
+javasrcipt and python braches for merging oru project done in python as well as javasrcipt.
 
 This project is done by 
                    
