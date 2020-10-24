@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from PyQt5.QtGui import QKeySequence
 import sys
 
 
@@ -20,6 +21,8 @@ class Window(QWidget):
         self.wt = self.width()
         print(str(self.ht)+ str(self.wt))
         self.UiComponents()
+        self.shortcut_close = QShortcut(QKeySequence('Q'), self)
+        self.shortcut_close.activated.connect(self.closeApp)
         self.show()
     def UiComponents(self):
         button = []
@@ -55,6 +58,8 @@ class Window(QWidget):
                     sys.exit()
         return add_data
 
+    def closeApp(self):
+        App.quit()
 App = QApplication(sys.argv)
 window = Window()
 sys.exit(App.exec())
