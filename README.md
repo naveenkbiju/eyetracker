@@ -34,7 +34,7 @@ https://github.com/brownhci/WebGazer.git
 
 We have divided our project and created seperate branches for each person and also additional branches to make them merge at the end of project.
 
-javasrcipt and python braches for merging oru project done in python as well as javasrcipt.
+javascript and python braches for merging our project done in python as well as javascript.
 
 This project is done by 
                    
