@@ -30,7 +30,7 @@ class Window(QWidget):
         self.show()
     def start_webcam(self):
         if not self.is_camera_running:
-            self.capture = cv2.VideoCapture(0)  # VideoCapture(0) sometimes drops error #-1072875772
+            self.capture = cv2.VideoCapture(0)
             self.is_camera_running = True
             self.timer = QTimer(self)
             self.timer.timeout.connect(self.update_frame)
