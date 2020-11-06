@@ -7,12 +7,8 @@ from .Prediction import GazePredict
 import logging
 import pickle
 import sys
-class Calibrate:
-    def __init__(self):
-        self.App = QApplication(sys.argv)
-        window = self.CalibrationWindow(self.App)
-        self.App.exec()
-class CalibrationWindow(QWidget):
+from .PredictionModel import PredictionModel
+class CalibrationModel(QWidget):
     def __init__(self, App):
         super().__init__()
         self.App = App
@@ -32,7 +28,7 @@ class CalibrationWindow(QWidget):
     def initialisation(self):
         self.x_train = []
         self.y_train = []
-
+        self.prediction_model = PredictionModel()
     def app_shortcut(self):
         self.shortcut_close = QShortcut(QKeySequence('Q'), self)
         self.shortcut_close.activated.connect(self.closeApp)

@@ -15,9 +15,9 @@ class Video:
         _, frame = self.capture.read()
         self.gaze.refresh(frame)
     def is_eye_detected(self):
-        if (self.gaze.pupil_left_coords() != None and self.gaze.pupil_right_coords() != None):
-            return True
-        return False
+        if ((self.gaze.pupil_left_coords() == None) or (self.gaze.pupil_right_coords() == None)):
+            return False
+        return True
     def get_pupil_coords(self):
         if self.is_eye_detected() :
             return self.gaze.pupil_left_coords(),self.gaze.pupil_right_coords()
