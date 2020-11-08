@@ -42,6 +42,6 @@ This project is done by
 | ------ | ------ |
 | Marvel Varghese 17 | js-heatmaps |
 | Kevin Paul K - 9| jscalib |
-| Naveen K Biju - 36    | python-pupiltracking|
-|Lakshmi Harish Kumar - 14 |python-calibration|
+| Naveen K Biju - 36    | python|
+|Lakshmi Harish Kumar - 14 |predictions|
 
