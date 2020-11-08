@@ -6,6 +6,7 @@ from .video import Video
 from .Prediction import GazePredict
 import logging
 import pickle
+import logging
 import sys
 from .PredictionModel import PredictionModel
 class CalibrationModel(QWidget):
@@ -28,7 +29,6 @@ class CalibrationModel(QWidget):
     def initialisation(self):
         self.x_train = []
         self.y_train = []
-        self.prediction_model = PredictionModel()
     def app_shortcut(self):
         self.shortcut_close = QShortcut(QKeySequence('Q'), self)
         self.shortcut_close.activated.connect(self.closeApp)
@@ -67,8 +67,7 @@ class CalibrationModel(QWidget):
                 k = k + 1
 
     def showRetryDialog(self):
-        print("Eyes Not Detected")
-        logging.info("Eyes not detected")
+        logging.warn("Eyes not detected")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText("Eyes Not Detected")
@@ -78,7 +77,6 @@ class CalibrationModel(QWidget):
         msg.exec_()
 
     def showCalibCompleteDialog(self):
-        print("Calibration completed")
         logging.info("calibration completed")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -90,6 +88,7 @@ class CalibrationModel(QWidget):
 
     def ButtonPress(self, k, x, y):
         def calib():
+            logging.info("button pressed")
             if self.video.is_eye_detected():
                 self.add_data(x, y)
                 if self.isFiveTimes(k):
@@ -122,12 +121,11 @@ class CalibrationModel(QWidget):
         data = {}
         data["x_train"] = self.x_train
         data["y_train"] = self.y_train
-        pickle.dump(data, open("calibration_data/calibration.p", "wb"))
+        try :
+            pickle.dump(data, open("calibration_data/calibration.p", "wb"))
+        except(IOError):
+            logging.error("calibration file not found")
         self.closeApp()
 
     def closeApp(self):
-        self.App.quit()
-    def showGazePoint(self):
-        self.p = GazePredict()
-    def updateGazePoint(self):
-        x , y = self.p.predict(self.video.get_pupil_coords())
+        self.App.exit()

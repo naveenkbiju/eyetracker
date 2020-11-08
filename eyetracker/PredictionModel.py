@@ -5,7 +5,9 @@ from .video import Video
 from .Prediction import GazePredict
 import sys
 class PredictionModel(QWidget):
-    def load(self):
+    def __init__(self):
+        self.x_coords = 50
+        self.y_coords = 50
         super().__init__()
         self.setWindowTitle("Python Prediction")
         self.showFullScreen()
@@ -17,6 +19,7 @@ class PredictionModel(QWidget):
     def Initialisation(self):
         self.video = Video()
         self.predict = GazePredict()
+
     def startPrediction(self):
         self.video.start_webcam()
         self.predict.train()
@@ -28,4 +31,13 @@ class PredictionModel(QWidget):
         self.video.update_frame()
         if self.video.is_eye_detected():
             (x1,y1),(x2,y2) = self.video.get_pupil_coords()
-            print(self.predict.predict(x1,y1,x2,y2))
+            coords  = self.predict.predict(x1,y1,x2,y2)
+            self.x_coords = coords[0][0]
+            self.y_coords = coords[0][1]
+            print(self.x_coords,self.y_coords)
+            self.update()
+
+    def paintEvent(self, event):
+        qp = QPainter(self)
+        qp.setPen(QPen(Qt. blue , 8 , Qt.SolidLine))
+        qp.drawEllipse(self.x_coords,self.y_coords, 30 , 30)
