@@ -29,6 +29,8 @@ https://github.com/pa7/heatmap.js.git
 
 https://github.com/brownhci/WebGazer.git
 
+https://github.com/antoinelame/GazeTracking
+
 Video description of each member of this project is given in the given link:
 https://drive.google.com/drive/folders/1BjcpvfFuSkkQNc7doHi6KpGm0T0C59ii?usp=sharing
 
