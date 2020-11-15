@@ -18,7 +18,7 @@ class GazePredict:
         x_train,x_test , y_train , y_test = train_test_split(x_train,y_train)
         self.reg = LinearRegression().fit(x_train, y_train)
         self.is_trained = True
-    def predict(self,x,y):
+    def predict(self,x1,y1,x2,y2):
         if self.is_trained :
-            return
+           return self.reg.predict([[x1,y1,x2,y2]])
         logging.error("You Need to Train the Model before Predict")

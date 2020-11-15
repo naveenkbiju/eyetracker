@@ -6,13 +6,10 @@ from .video import Video
 from .Prediction import GazePredict
 import logging
 import pickle
+import logging
 import sys
-class Calibrate:
-    def __init__(self):
-        self.App = QApplication(sys.argv)
-        window = self.CalibrationWindow(self.App)
-        self.App.exec()
-class CalibrationWindow(QWidget):
+from .PredictionModel import PredictionModel
+class CalibrationModel(QWidget):
     def __init__(self, App):
         super().__init__()
         self.App = App
@@ -32,7 +29,6 @@ class CalibrationWindow(QWidget):
     def initialisation(self):
         self.x_train = []
         self.y_train = []
-
     def app_shortcut(self):
         self.shortcut_close = QShortcut(QKeySequence('Q'), self)
         self.shortcut_close.activated.connect(self.closeApp)
@@ -71,8 +67,7 @@ class CalibrationWindow(QWidget):
                 k = k + 1
 
     def showRetryDialog(self):
-        print("Eyes Not Detected")
-        logging.info("Eyes not detected")
+        logging.warn("Eyes not detected")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText("Eyes Not Detected")
@@ -82,7 +77,6 @@ class CalibrationWindow(QWidget):
         msg.exec_()
 
     def showCalibCompleteDialog(self):
-        print("Calibration completed")
         logging.info("calibration completed")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -94,6 +88,7 @@ class CalibrationWindow(QWidget):
 
     def ButtonPress(self, k, x, y):
         def calib():
+            logging.info("button pressed")
             if self.video.is_eye_detected():
                 self.add_data(x, y)
                 if self.isFiveTimes(k):
@@ -126,12 +121,11 @@ class CalibrationWindow(QWidget):
         data = {}
         data["x_train"] = self.x_train
         data["y_train"] = self.y_train
-        pickle.dump(data, open("calibration_data/calibration.p", "wb"))
+        try :
+            pickle.dump(data, open("calibration_data/calibration.p", "wb"))
+        except(IOError):
+            logging.error("calibration file not found")
         self.closeApp()
 
     def closeApp(self):
-        self.App.quit()
-    def showGazePoint(self):
-        self.p = GazePredict()
-    def updateGazePoint(self):
-        x , y = self.p.predict(self.video.get_pupil_coords())
+        self.App.exit()
