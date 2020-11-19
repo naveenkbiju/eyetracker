@@ -1,17 +1,56 @@
 <!DOCTYPE html>
-
 <html>
+<style>
+    input[type=text]{
+        width:100%;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        margin: 8px 0;
+        outline:none;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: .3s;
+    }
 
-<head>
-	<title>My first webpage</title>
-</head>
+    input[type=text]:focus{
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+</style>
+    <head>
+        <title>Eye Tracker</title>
+        
 
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/fontAwesome.css">
+        <link rel="stylesheet" href="css/hero-slider.css">
+        <link rel="stylesheet" href="css/templatemo-main.css">
+        <link rel="stylesheet" href="css/owl-carousel.css">
+
+        
+    </head>
 <body>
-	<div>
-		<div><a href="http://www.red.com" target="iframe_1">Red.com</a></div>
-		<div><a href="iframe.html" target="iframe_1">iframe</a></div>
-	</div>
-	<iframe src="iframe.html" height="600" width="800" name="iframe_1"></iframe>
-</body>
 
+    
+
+    <div class="parallax-content baner-content" id="home">
+        <div class="container">
+            <div class="first-content">
+                <h1>Eye Tracking your website</h1>
+                <span><em>BY</em>| CODEHEIST</span>
+                <input id="myurl" placeholder="Enter URL">
+                <div class="primary-button">
+                    <button onclick="clicked()" value="SUBMIT">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script>
+        function clicked(){
+            var a = document.getElementById("myurl").value;
+            window.location.replace("html1.html?"+ a)
+        }
+    </script>
+</body>
 </html>

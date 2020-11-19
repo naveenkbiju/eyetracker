@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-
 <html>
 
 <head>
+	<script type="text/javascript">
+		function mytest(){
+		var queryString = decodeURIComponent(window.location.search);
+		queryString = queryString.substring(1);
+		document.getElementById("myframe").setAttribute("src",queryString);
+			
+		}
+	</script>
 	<title>My first webpage</title>
 </head>
 
-<body>
-	<p>This is the iframe content.</p>
+<body onload="mytest()">
+	<iframe id="myframe" height="100%" width="100%"></iframe>
 </body>
-
 </html>
