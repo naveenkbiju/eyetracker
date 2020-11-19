@@ -1,0 +1,24 @@
+<html>
+
+<head>
+	<script type="text/javascript">
+		function mytest(){
+		var queryString = decodeURIComponent(window.location.search);
+		queryString = queryString.substring(1);
+		document.getElementById("myframe").setAttribute("src",queryString);
+			
+		}
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>My first webpage</title>
+</head>
+
+<body onload="mytest()">
+	<button class="btn">START</button>
+	<button class="btn">STOP</button>
+	<button class="btn">GENERATE HEATMAP</button>
+	<iframe id="myframe" height="100%" width="100%"></iframe>
+	
+	
+</body>
+</html>

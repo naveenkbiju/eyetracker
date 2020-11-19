@@ -38,14 +38,19 @@
             <div class="first-content">
                 <h1>Eye Tracking your website</h1>
                 <span><em>BY</em>| CODEHEIST</span>
-                <input type="text" placeholder="Enter URL">
+                <input id="myurl" placeholder="Enter URL">
                 <div class="primary-button">
-                    <a href="#services">Submit</a>
+                    <button onclick="clicked()" value="SUBMIT">SUBMIT</button>
                 </div>
             </div>
         </div>
     </div>
 
+     <script>
+        function clicked(){
+            var a = document.getElementById("myurl").value;
+            window.location.replace("mainpage.html?link="+ a)
+        }
+    </script>
 </body>
 </html>
-
