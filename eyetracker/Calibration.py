@@ -10,9 +10,10 @@ import logging
 import sys
 from .PredictionModel import PredictionModel
 class CalibrationModel(QWidget):
-    def __init__(self, App):
+    def __init__(self, App,video):
         super().__init__()
         self.App = App
+        self.video = video
         self.setWindowTitle("Python")
         self.showFullScreen()
         palette = QPalette()
@@ -22,7 +23,6 @@ class CalibrationModel(QWidget):
         print(str(self.ht) + str(self.wt))
         self.initialisation()
         self.showpoints()
-        self.start_webcam()
         self.app_shortcut()
         self.show()
 
@@ -34,11 +34,9 @@ class CalibrationModel(QWidget):
         self.shortcut_close.activated.connect(self.closeApp)
 
     def start_webcam(self):
-        self.video = Video()
-        self.video.start_webcam()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.video.update_frame)
-        self.timer.start(2)
+        self.timer.start(1)
 
     def getCssPath(self):
         cwd = os.path.abspath(os.path.dirname(__file__))
@@ -90,7 +88,6 @@ class CalibrationModel(QWidget):
         def calib():
             logging.info("button pressed")
             if self.video.is_eye_detected():
-                self.add_data(x, y)
                 if self.isFiveTimes(k):
                     self.button[k].setStyleSheet("background-color: red ")
                 if self.isCalibComplete():
@@ -111,12 +108,7 @@ class CalibrationModel(QWidget):
         if False in self.buttonComplete:
             return False
         return True
-
-    def add_data(self, x, y):
-        (x1, y1), (x2, y2) = self.video.get_pupil_coords()
-        self.x_train.append([x1, y1, x2, y2])
-        self.y_train.append([x, y])
-
+    
     def save(self):
         data = {}
         data["x_train"] = self.x_train
@@ -124,7 +116,7 @@ class CalibrationModel(QWidget):
         try :
             pickle.dump(data, open("calibration_data/calibration.p", "wb"))
         except(IOError):
-            logging.error("calibration file not found")
+            logging.error("calibration_data  directory  not found")
         self.closeApp()
 
     def closeApp(self):
