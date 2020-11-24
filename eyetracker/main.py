@@ -7,9 +7,9 @@ import sys
 class EyeTracker(object):
     def __init__(self):
         self.App = QApplication(sys.argv)
-    def load_calibration_model(self):
-        window = CalibrationModel(self.App)
-        logging.info("calibration model started")
+    def load_calibration_model(self,TestAccuracy = False):
+        window = CalibrationModel(self.App,TestAccuracy)
+        logging.info("calibration model start   ed")
         self.App.exec()
     def train(self):
         self.p = GazePredict()

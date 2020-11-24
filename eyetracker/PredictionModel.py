@@ -27,13 +27,12 @@ class PredictionModel(QWidget):
         timer.timeout.connect(self.updatePoint)
         timer.start(2)
 
+
     def updatePoint(self):
         self.video.update_frame()
         if self.video.is_eye_detected():
             (x1,y1),(x2,y2) = self.video.get_pupil_coords()
-            coords  = self.predict.predict(x1,y1,x2,y2)
-            self.x_coords = coords[0][0]
-            self.y_coords = coords[0][1]
+            self.x_coords  , self.y_coords  = self.predict.predict(x1,y1,x2,y2)
             print(self.x_coords,self.y_coords)
             self.update()
 

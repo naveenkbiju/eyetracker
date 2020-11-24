@@ -27,4 +27,4 @@ class AccuracyTest(object):
                 precision = 100
             precisionPercentages += precision
             count += 1
-        return round(precisionPercentages/count , 2)
+        return round(precisionPercentages/count , 2)                

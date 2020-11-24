@@ -20,5 +20,6 @@ class GazePredict:
         self.is_trained = True
     def predict(self,x1,y1,x2,y2):
         if self.is_trained :
-           return self.reg.predict([[x1,y1,x2,y2]])
+            coords = self.reg.predict([[x1,y1,x2,y2]])
+            return coords[0][0] , coords[0][1]
         logging.error("You Need to Train the Model before Predict")
