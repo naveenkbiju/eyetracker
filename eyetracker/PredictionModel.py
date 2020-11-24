@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+from .self_calibration import SelfCalibration
+import pickle
 from .video import Video
 from .Prediction import GazePredict
 import sys
@@ -15,17 +17,24 @@ class PredictionModel(QWidget):
         palette.setColor(QPalette.Background, Qt.white)
         self.setPalette(palette)
         self.Initialisation()
+        self.startPrediction()
         self.show()
     def Initialisation(self):
         self.video = Video()
         self.predict = GazePredict()
-
-    def startPrediction(self):
         self.video.start_webcam()
-        self.predict.train()
+        self.self_calibration = SelfCalibration(self.train_model,self.video)
+    def load_data(self):
+        print("loading data")
+        try : pickle.load(open('calibration_data/calibration.p', 'rb'))
+        except(IOError):print("filenotfound")
+    def train_model(self,data):
+         self.predict.train(data)           
+    def startPrediction(self):
+        self.train(self.load_data())
         timer = QTimer(self)
         timer.timeout.connect(self.updatePoint)
-        timer.start(2)
+        timer.start(1)
 
     def updatePoint(self):
         self.video.update_frame()
@@ -41,3 +50,6 @@ class PredictionModel(QWidget):
         qp = QPainter(self)
         qp.setPen(QPen(Qt. blue , 8 , Qt.SolidLine))
         qp.drawEllipse(self.x_coords,self.y_coords, 30 , 30)
+ 
+     
+        
