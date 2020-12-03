@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html>
-<style>
-    input[type=text]{
-        width:100%;
-        border: 2px solid #aaa;
-        border-radius: 4px;
-        margin: 8px 0;
-        outline:none;
-        padding: 8px;
-        box-sizing: border-box;
-        transition: .3s;
-    }
 
-    input[type=text]:focus{
-        border-color: dodgerBlue;
-        box-shadow: 0 0 8px 0 dodgerBlue;
-    }
-</style>
     <head>
+        
+        
         <title>Eye Tracker</title>
         
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/fontAwesome.css">
-        <link rel="stylesheet" href="css/hero-slider.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/templatemo-main.css">
-        <link rel="stylesheet" href="css/owl-carousel.css">
-
+    
+        <script type="text/javascript">
+            function validation()
+            {
+                var form = document.getElementById("form");
+                var URL = document.getElementById("URL").value;
+                var text = document.getElementById("text");
+                var pattern =/(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+    
+                if(URL.match(pattern))
+                {
+                    document.getElementById("submit_button").disabled = false;
+                    form.classList.add("valid");
+                    form.classList.remove("invalid");
+                    text.innerHTML = "The URL entered is Valid.";
+                    text.style.color = "#00ff00";
+                }
+                else
+                {
+                    document.getElementById("submit_button").disabled = true;
+                    form.classList.remove("valid");
+                    form.classList.add("invalid");
+                    text.innerHTML = "Please enter Valid URL";
+                    text.style.color = "#ff0000";
+                }
+            }
+            function clicked(){
+                var a = document.getElementById("URL").value;
+                document.write("You will be redirected calibration page in 5sec.");
+                setTimeout(Redirect(a),5000);
+            }
+            function Redirect(url) {
+                window.location = "mainpage.html?link=" + url ; 
+             } 
+        </script>
         
     </head>
 <body>
@@ -38,19 +55,26 @@
             <div class="first-content">
                 <h1>Eye Tracking your website</h1>
                 <span><em>BY</em>| CODEHEIST</span>
-                <input id="myurl" placeholder="Enter URL">
+                
+
+
+                <form id="form" action="#">
+                    <div class="inputBox">
+                        <input type="text" name="" id="URL" placeholder="Enter URL" onkeydown="validation()">
+                        <span id="text"></span>
+                </form>
+
+
+
+
                 <div class="primary-button">
-                    <button onclick="clicked()" value="SUBMIT">SUBMIT</button>
+                    <button id = "submit_button"onclick="clicked()" disabled = true value="SUBMIT">SUBMIT</button>
                 </div>
             </div>
         </div>
     </div>
 
-     <script>
-        function clicked(){
-            var a = document.getElementById("myurl").value;
-            window.location.replace("mainpage.html?link="+ a)
-        }
-    </script>
+
+
 </body>
 </html>

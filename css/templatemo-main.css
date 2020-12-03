@@ -1,10 +1,4 @@
-/*
 
-Vanilla Template
-
-https://templatemo.com/tm-526-vanilla
-
-*/
 
 p {
   font-size: 15px;
@@ -17,7 +11,7 @@ section {
 }
 
 body { 
-  position: relative; /* we need this for the scrollspy */ 
+  position: relative; 
   font-size: 14px;
 }
 
