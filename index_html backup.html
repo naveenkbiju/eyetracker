@@ -37,11 +37,11 @@
             }
             function clicked(){
                 var a = document.getElementById("URL").value;
-                document.write("You will be redirected to the calibration page in 1 seconds.");
-                setTimeout(Redirect(a),1000);
+                document.write("You will be redirected calibration page in 5sec.");
+                setTimeout(Redirect(a),5000);
             }
-            function Redirect(URL) {
-                window.location.href = "calibration.html?" + URL;
+            function Redirect(url) {
+                window.location = "mainpage.html?link=" + url ; 
              } 
         </script>
         
