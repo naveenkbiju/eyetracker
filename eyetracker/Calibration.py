@@ -8,7 +8,6 @@ import logging
 import pickle
 import logging
 import sys
-from .PredictionModel import PredictionModel
 from .Prediction import GazePredict
 from .accuracy import AccuracyTest
 from .Classifier import *
@@ -149,8 +148,8 @@ class CalibrationModel(QWidget):
         print(models)
         compare = accuracy.compare(self.data , centerPoint,self.ht)
         print(compare)
-        for (model , result) in (list_models() , compare) :
-            test_value += (str(model) + "Accuracy : "  + str(result) + "\n")
+        for model , result in zip(list_models() , compare) :
+            test_value += (str(model) + " Accuracy : "  + str(result) + "\n")
         self.infoDialog(test_value , "Accuracy Test")
         self.recalibrateDialog()
     def paintEvent(self , event):
@@ -170,6 +169,7 @@ class CalibrationModel(QWidget):
             self.button[k].setStyleSheet(open(self.getPath("stylesheet/buttonStyle.css")).read())
             self.button[k].show()           
     def closeApp(self):
+        self.timer.stop()
         self.App.exit()
     def showRetryDialog(self):
         logging.warn("Eyes not detected")
