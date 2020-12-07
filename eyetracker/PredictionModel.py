@@ -3,6 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from .video import Video
 from .Prediction import GazePredict
+
 import sys
 class PredictionModel(QWidget):
     def __init__(self):
@@ -35,7 +36,6 @@ class PredictionModel(QWidget):
             self.x_coords  , self.y_coords  = self.predict.predict(x1,y1,x2,y2)
             print(self.x_coords,self.y_coords)
             self.update()
-
     def paintEvent(self, event):
         qp = QPainter(self)
         qp.setPen(QPen(Qt. blue , 8 , Qt.SolidLine))

@@ -11,6 +11,7 @@ import sys
 from .PredictionModel import PredictionModel
 from .Prediction import GazePredict
 from .accuracy import AccuracyTest
+from .Classifier import *
 import time
 class CalibrationModel(QWidget):
     def __init__(self, App , testAccuracy):
@@ -19,10 +20,10 @@ class CalibrationModel(QWidget):
         self.App = App
         self.accuracyTest = testAccuracy
         self.setWindowTitle("Python")
-        self.showFullScreen()
         palette = QPalette()
         palette.setColor(QPalette.Background, Qt.white)
         self.setPalette(palette)
+        self.showFullScreen()
         self.ht, self.wt = self.height(), self.width()
         print(str(self.ht) + str(self.wt))
         self.initialisation()
@@ -45,7 +46,6 @@ class CalibrationModel(QWidget):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.video.update_frame)
         self.timer.start(1)
-
     def getPath(self,path_name):
         cwd = os.path.abspath(os.path.dirname(__file__))
         css_path = os.path.abspath(os.path.join(cwd, path_name))
@@ -124,35 +124,40 @@ class CalibrationModel(QWidget):
         self.infoDialog("look at the center point for some time" , "Accuracy Test")
         self.hideButtons()
         self.buttonCenter.show()
-        self.predict = GazePredict()
-        self.predict.train()
+        self.predict = [GazePredict(model = model).train() for model in list_models()]
         self.data = []
         self.TestTimer = QTimer(self)
         self.TestTimer.timeout.connect(self.test_getData)
-        self.TestTimer.start(500)
+        self.TestTimer.start(200)
     def test_getData(self):
             print("testdata")
             if len(self.data) == 50:
                 self.stop_timer()         
             if self.video.is_eye_detected() :
                     (x1,y1),(x2,y2) = self.video.get_pupil_coords() 
-                    x_pred , y_pred = self.predict.predict(x1,y1,x2,y2)
-                    print("data added ")
-                    self.data.append((x_pred , y_pred))
+                    xy_pred = [p.predict(x1,y1,x2,y2) for p in self.predict]
+                    print("data added ") 
+                    self.data.append(xy_pred)
                     self.update()
     def stop_timer(self):
         print("stoped")
         self.TestTimer.stop()
-        accuracy = AccuracyTest().load(self.data)
+        accuracy = AccuracyTest()
         centerPoint = self.half_wt , self.half_ht
-        test_value = "Accuracy : "  + str(accuracy.checkAccuracy(centerPoint,self.ht))
+        test_value = ''
+        models = list_models()
+        print(models)
+        compare = accuracy.compare(self.data , centerPoint,self.ht)
+        print(compare)
+        for (model , result) in (list_models() , compare) :
+            test_value += (str(model) + "Accuracy : "  + str(result) + "\n")
         self.infoDialog(test_value , "Accuracy Test")
         self.recalibrateDialog()
     def paintEvent(self , event):
         qp = QPainter(self)
         qp.setBrush(QBrush(Qt.red, Qt.SolidPattern))
         for i in self.data :
-            x,y = i
+            x,y = i[0]
             qp.drawEllipse(x,y, 15 , 15)
     def recalibrate(self):
         self.data = []
@@ -176,7 +181,7 @@ class CalibrationModel(QWidget):
         msg.setStandardButtons(QMessageBox.Retry)
         msg.exec_()
     def infoDialog(self,text , title,info = ""):
-        msg = QMessageBox()
+        msg = QMessageBox(self)
         msg.setIcon(QMessageBox.Information)
         msg.setText(text)
         msg.setWindowTitle(title)
@@ -189,7 +194,7 @@ class CalibrationModel(QWidget):
         msg.setIcon(QMessageBox.Information)
         msg.setText("Do you want to close app ?")
         msg.setWindowTitle("EyeTracker")
-        msg.setStandardButtons(QMessageBox.Close | QMessageBox.Cancel )
+        msg.setStandardButtons(QMessageBox.Cancel | QMessageBox.Close )
         if(msg.exec_() == QMessageBox.Close):
             self.closeApp()               
     def recalibrateDialog(self):
