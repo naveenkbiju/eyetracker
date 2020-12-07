@@ -8,15 +8,14 @@ import logging
 import pickle
 import logging
 import sys
-from .PredictionModel import PredictionModel
 from .Prediction import GazePredict
 from .accuracy import AccuracyTest
 import time
+import cv2
 class CalibrationModel(QWidget):
-    def __init__(self, App , testAccuracy):
+    def __init__(self, testAccuracy,video):
         self.data = []
         super().__init__()
-        self.App = App
         self.accuracyTest = testAccuracy
         self.setWindowTitle("Python")
         self.showFullScreen()
@@ -27,8 +26,9 @@ class CalibrationModel(QWidget):
         print(str(self.ht) + str(self.wt))
         self.initialisation()
         self.showpoints()
-        self.start_webcam()
+        self.start()
         self.app_shortcut()
+        self.display_image(video)
         self.show()
         self.infoDialog("click each points 5 times" , "EyeTracker" , "press Q to quit \n press R to recalibrate")
     def initialisation(self):
@@ -39,13 +39,33 @@ class CalibrationModel(QWidget):
         self.shortcut_close.activated.connect(self.closeAppDialog)
         self.shortcut_recalibrate = QShortcut(QKeySequence('R'), self)
         self.shortcut_recalibrate.activated.connect(self.recalibrateDialog)
-    def start_webcam(self):
+    def start(self):
         self.video = Video()
-        self.video.start_webcam()
+        self.capture = cv2.VideoCapture(0)
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.video.update_frame)
+        self.timer.timeout.connect(self.update_frame)
         self.timer.start(1)
-
+    def stop(self):
+        self.timer.stop()
+        self.capture.release()
+    def update_frame(self):
+        _,frame = self.capture.read()
+        self.video.update_frame(frame)
+        self.update_image()
+    def display_image(self,flag = True):
+        self.image_label = QLabel(self)
+        self.image_label.move(0,self.rad)
+        self.image_label.resize(self.wt/3.5, self.ht/3)
+        if(flag):
+            self.image_label.show()
+    def update_image(self):
+        image = self.video.videoFrame()
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        h, w, ch = image.shape
+        bytes_per_line = ch * w
+        convert_to_Qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
+        p = convert_to_Qt_format.scaled(self.wt/3.5, self.ht/3, Qt.KeepAspectRatio)
+        self.image_label.setPixmap(QPixmap.fromImage(p))    
     def getPath(self,path_name):
         cwd = os.path.abspath(os.path.dirname(__file__))
         css_path = os.path.abspath(os.path.join(cwd, path_name))
@@ -85,11 +105,11 @@ class CalibrationModel(QWidget):
                     self.button[k].setStyleSheet("background-color: red ; ; border-radius: 10px")
                 if self.isCalibComplete():
                     self.save()
-                    print(self.accuracyTest)
                     if self.accuracyTest :
                         self.accuracyTestMessageBox()
                     else :    
                         self.infoDialog("calibration completed "  , "EyeTracking")
+                        self.closeApp()
             else:
                 self.showRetryDialog()
 
@@ -129,7 +149,7 @@ class CalibrationModel(QWidget):
         self.data = []
         self.TestTimer = QTimer(self)
         self.TestTimer.timeout.connect(self.test_getData)
-        self.TestTimer.start(500)
+        self.TestTimer.start(250)
     def test_getData(self):
             print("testdata")
             if len(self.data) == 50:
@@ -165,7 +185,8 @@ class CalibrationModel(QWidget):
             self.button[k].setStyleSheet(open(self.getPath("stylesheet/buttonStyle.css")).read())
             self.button[k].show()           
     def closeApp(self):
-        self.App.exit()
+        self.stop()
+        self.close()
     def showRetryDialog(self):
         logging.warn("Eyes not detected")
         msg = QMessageBox()
