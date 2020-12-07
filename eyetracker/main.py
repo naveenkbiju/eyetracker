@@ -16,7 +16,7 @@ class EyeTracker(object):
         logging.info("calibration model started")
         self.App.exec()
         self.train()
-    def train(self,calibration_file_name = "calibration_data/calibration.p"):
+    def train(self,calibration_file_name = "calibration.p"):
         self.gaze.train(calibration_file_name)
         logging.info("trainig the model")
     def refresh(self , frame ):

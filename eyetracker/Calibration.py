@@ -138,7 +138,7 @@ class CalibrationModel(QWidget):
         data["x_train"] = self.x_train
         data["y_train"] = self.y_train
         try :
-            pickle.dump(data, open("calibration_data/calibration.p", "wb"))
+            pickle.dump(data, open("calibration.p", "wb"))
         except(IOError):
             logging.error("calibration file not found")
     def testAccuracy(self):

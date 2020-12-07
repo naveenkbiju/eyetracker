@@ -9,9 +9,10 @@ from sklearn.model_selection import train_test_split
 class GazePredict:
     def __init__(self , model= "LR"):
         self.is_trained = False
+        self.model = model
     def load_data(self ,filename):
         return pickle.load(open(filename, 'rb'))
-    def train(self,filename):
+    def train(self,filename = "calibration.p"):
         data = self.load_data(filename)
         x_train = data['x_train']
         y_train = data['y_train']
