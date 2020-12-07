@@ -1,5 +1,5 @@
 import cv2
-from gaze_tracking import GazeTracking
+from .lib.gaze_tracking import GazeTracking
 class Video:
     def __init__(self):
         self.gaze = GazeTracking()
