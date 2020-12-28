@@ -1,24 +1,27 @@
  <html>
 
 <head>
-	<script type="text/javascript">
-		function mytest(){
-		var queryString = decodeURIComponent(window.location.search);
-		queryString = queryString.substring(1);
-		document.getElementById("myframe").setAttribute("src",queryString);
-			
-		}
-	</script>
+	<script src="heatmap.min.js"></script>
+	<script src="webgazer.js"></script>
+	<script src="test1.js"></script>
+	<script src= "https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"> 
+  </script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>My first webpage</title>
 </head>
 
-<body onload="mytest()">
-	<button class="btn">START</button>
-	<button class="btn">STOP</button>
-	<button class="btn">GENERATE HEATMAP</button>
-	<iframe id="myframe" height="100%" width="100%"></iframe>
-	
-	
+<body>
+	<button class="btn" id = "startBtn" onclick="start()">START</button>
+	<button class="btn" id = "stopBtn" onclick = "stop()">STOP</button>
+	<button class="btn" onclick="htmp_btn()">GENERATE HEATMAP</button>
+	<div id="maincanvas"><div class="heatmap-wrapper">
+		<div class="heatmap" style="position: relative;">
+			<iframe id="myframe" height="100%" width="100%"></iframe>
+	  </div>
+
+	</div>
+	</div>
+	<h1>Output</h1> 
+    <div id="output"></div>
 </body>
 </html>
