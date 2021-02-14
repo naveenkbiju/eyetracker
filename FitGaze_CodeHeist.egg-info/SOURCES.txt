@@ -1,0 +1,13 @@
+README.md
+setup.py
+FitGaze/Calibration.py
+FitGaze/Classifier.py
+FitGaze/Prediction.py
+FitGaze/__init__.py
+FitGaze/accuracy.py
+FitGaze/main.py
+FitGaze/video.py
+FitGaze_CodeHeist.egg-info/PKG-INFO
+FitGaze_CodeHeist.egg-info/SOURCES.txt
+FitGaze_CodeHeist.egg-info/dependency_links.txt
+FitGaze_CodeHeist.egg-info/top_level.txt

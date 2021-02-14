@@ -3,7 +3,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
 import cv2
-from eyetracker import EyeTracker
+from FitGaze import EyeTracker
 class PredictionModel(QWidget):
     def __init__(self,tracker):
         self.x_coords = 50
@@ -39,7 +39,7 @@ class PredictionModel(QWidget):
         
 if __name__ == '__main__' :
         tracker = EyeTracker()
-        tracker.calibrate()
+        tracker.calibrate(TestAccuracy = True)
         app = QApplication(sys.argv)
         a = PredictionModel(tracker)
         sys.exit(app.exec())    

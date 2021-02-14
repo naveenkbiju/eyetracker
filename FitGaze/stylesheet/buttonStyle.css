@@ -1,0 +1,26 @@
+QPushButton {
+    color: rgba(10, 6, 236, 0.76);
+    border: 1px solid #55040c;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: .5, stop: 0 #111111, stop: 1 #c9d688
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: .5, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: .5, stop: 0 #fff, stop: 1 #ddd
+        );
+}

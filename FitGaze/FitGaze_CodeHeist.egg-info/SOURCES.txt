@@ -1,0 +1,6 @@
+README.md
+setup.py
+FitGaze_CodeHeist.egg-info/PKG-INFO
+FitGaze_CodeHeist.egg-info/SOURCES.txt
+FitGaze_CodeHeist.egg-info/dependency_links.txt
+FitGaze_CodeHeist.egg-info/top_level.txt
