@@ -25,3 +25,13 @@
     python3.7 -m pip install .
 
     ```
+## Run Example Program
+
+    example_test.py is a sample python program devoloped using FitGaze library 
+    
+    you can run the sample program in terminal by below command.
+
+     ```
+    python3.7 example_test.py
+
+    ```
