@@ -26,7 +26,7 @@
 
     ```
     
-## Run Example Program
+## Run Sample Program
 
 example_test.py is a sample python program devoloped using FitGaze library .
 To run the sample program type the following command.
