@@ -9,11 +9,19 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>My first webpage</title>
 </head>
+<style>
+	#container
+	{
+		text-align:center;
+	}
+</style>
 
 <body>
-	<button class="btn" id = "startBtn" onclick="start()">START</button>
-	<button class="btn" id = "stopBtn" onclick = "stop()">STOP</button>
-	<button class="btn" onclick="htmp_btn()">GENERATE HEATMAP</button>
+	<div id="container">
+		<button class="btn" id = "startBtn" onclick="start()">START</button>
+		<button class="btn" id = "stopBtn" onclick = "stop()">STOP</button>
+		<button class="btn" onclick="htmp_btn()">GENERATE HEATMAP</button>
+	</div>
 	<div id="maincanvas"><div class="heatmap-wrapper">
 		<div class="heatmap" style="position: relative;">
 			<iframe id="myframe" height="100%" width="100%"></iframe>
