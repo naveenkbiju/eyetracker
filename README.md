@@ -39,7 +39,7 @@ https://drive.google.com/drive/folders/1q5L0wzH7NTqxOhwNdVUteHCfzUqAU48z?usp=sha
 
 The python part of the project is done in the the branch "python". All the files regarding the FitGaze library are there, and also the details to install this package is specified in install.md file in the "python" branch.
 
-The webpage part of the project is done in the branch "javascrpit".  All the files regarding the FitGaze library are there.
+The webpage part of the project is done in the branch "javascript".  All the files regarding the FitGaze library are there.
 
 
 
